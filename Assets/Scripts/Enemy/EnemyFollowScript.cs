@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
+
 
 public class EnemyFollowScript : MonoBehaviour {
 
 
-    [SerializeField] Transform target;
+    [SerializeField] Transform player;
+    [SerializeField] Vector3 healthBarOffset;
 
+    private Rigidbody2D enemyRB;
+    private Camera myCamera;
+    private Slider healthBar;
 
     NavMeshAgent agent;
 
@@ -15,14 +21,25 @@ public class EnemyFollowScript : MonoBehaviour {
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
+        
         agent.updateUpAxis = false;
+
+        enemyRB = GetComponent<Rigidbody2D>();
+        myCamera = Camera.main;
+        healthBar = GetComponentInChildren<Slider>();
 
     }
 
     void Update() {
+        agent.SetDestination(player.position); //Sets destination, moves the enemy and calculates the path
+        rotateEnemyToPlayer();
+    }
+    
 
-        agent.SetDestination(target.position);
-        
+    private void rotateEnemyToPlayer(){
+        enemyRB.rotation = Mathf.Atan2(player.transform.position.y, player.transform.position.x) * Mathf.Rad2Deg; //Find the angle and rotate the enemy to the player
+        healthBar.transform.rotation = myCamera.transform.rotation; //Makes the healthBar face the camera
+        healthBar.transform.position = transform.position + healthBarOffset; //Makes the healthBar to be above the player on the offset value
     }
 }
 
