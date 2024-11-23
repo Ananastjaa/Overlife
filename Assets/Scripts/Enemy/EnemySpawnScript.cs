@@ -1,33 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class EnemySpawnScript : MonoBehaviour{
+public class EnemySpawnScript : MonoBehaviour
+{
 
     public GameObject enemy;
-    private GameObject player;
     private EnemyHealthBarScript healthBarScript;
+    private EnemyManager enemyManagerScript;
 
-    // Start is called before the first frame update
-    void Start(){
+    //init vars
+    [SerializeField] float enemyZSpawnCoordinate = -5;
+    private System.Random random;
+
+
+    void Start()
+    {
         //init Scripts
         healthBarScript = GetComponent<EnemyHealthBarScript>();
-
-        //Init stuff
-        player = GameObject.FindGameObjectWithTag("Player");
+        enemyManagerScript = GameObject.FindGameObjectWithTag("Environment").GetComponent<EnemyManager>();
 
 
-        
+        random = new System.Random(); // Initialize the random generator
     }
 
-    // Update is called once per frame
-    void Update()
+    private Vector3 GetRandomSpawnPosition()
     {
+        float spawnX, spawnY;
+
+        if (random.NextDouble() > 0.5f)
+        {// Spawn on left or right
+
+            spawnX = random.NextDouble() > 0.5 ? enemyManagerScript.cameraXMin : enemyManagerScript.cameraXMin;
+            spawnY = Mathf.Lerp(enemyManagerScript.cameraYMin, enemyManagerScript.cameraYMax, (float)random.NextDouble());
+        }
+        else// Spawn on top or bottom
+        {
+            
+            spawnY = random.NextDouble() > 0.5 ? enemyManagerScript.cameraYMax : enemyManagerScript.cameraYMin;
+            spawnX = Mathf.Lerp(enemyManagerScript.cameraXMin, enemyManagerScript.cameraXMax, (float)random.NextDouble());
+        }
+
+        return new Vector3(spawnX, spawnY, enemyZSpawnCoordinate);
+    }
+
+    public void SpawnEnemy()
+    {
+        enemyManagerScript.currentEnemyCount++;
+        
+        Instantiate(enemy, GetRandomSpawnPosition(), Quaternion.identity); // Instantiate the enemy at the calculated position
         
     }
 
-    public void spawnEnemy() {
-        Instantiate(enemy, new Vector3(0, 6, player.transform.position.z), player.transform.rotation);
-        healthBarScript.updateEnemyHealthBar();
-    }
+
+
 }

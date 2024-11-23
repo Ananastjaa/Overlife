@@ -9,7 +9,7 @@ using NavMeshPlus.Extensions;
 public class EnemyFollowScript : MonoBehaviour {
 
 
-    [SerializeField] Transform player;
+    GameObject player;
     [SerializeField] Vector3 healthBarOffset;
     public float rotationSpeed = 5f; // Controls how quickly the enemy rotates
 
@@ -17,7 +17,7 @@ public class EnemyFollowScript : MonoBehaviour {
     private Camera myCamera;
     private Slider healthBar;
 
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     private RotateAgentSmoothly rotateAgentSmoothly;
 
     
@@ -32,12 +32,13 @@ public class EnemyFollowScript : MonoBehaviour {
         enemyRB = GetComponent<Rigidbody2D>();
         myCamera = Camera.main;
         healthBar = GetComponentInChildren<Slider>();
+        player = GameObject.FindGameObjectWithTag("Player");
         
         
     }
 
     void Update() {
-        agent.SetDestination(player.position); //Sets destination, moves the enemy and calculates the path
+        agent.SetDestination(player.transform.position); //Sets destination, moves the enemy and calculates the path
         rotateEnemyToPlayer();
     }
     
@@ -52,4 +53,9 @@ public class EnemyFollowScript : MonoBehaviour {
         healthBar.transform.rotation = myCamera.transform.rotation; //Makes the healthBar face the camera
         healthBar.transform.position = transform.position + healthBarOffset; //Makes the healthBar to be above the player on the offset value
     }
+
+    public float distanceToThePlayerFoo(){
+        return agent.remainingDistance;
+    }
+
 }
