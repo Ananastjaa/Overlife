@@ -1,10 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.AI;
 
-public class EnemyFollowScript : MonoBehaviour{
-    //Public
+public class EnemyFollowScript : MonoBehaviour {
+
+
+    [SerializeField] Transform target;
+
+
+    NavMeshAgent agent;
+
+    void Start(){
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
+    }
+
+    void Update() {
+
+        agent.SetDestination(target.position);
+        
+    }
+}
+
+
+// Old working stuff for a simple straigthforward following
+    /*//Public
     public float followSpeed = 2.0f;
     public Slider healthBar;
     
@@ -51,3 +75,4 @@ public class EnemyFollowScript : MonoBehaviour{
         healthBar.transform.position = transform.position + healthBarTargetOffset;
     }
 }
+    */
