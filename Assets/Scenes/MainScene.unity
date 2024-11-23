@@ -122,17 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &392867441 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1147903496989516686, guid: 3061b55acaed36f4da89955ddbf0f8fe, type: 3}
-  m_PrefabInstance: {fileID: 546091538}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a58126575542a44a9c53347cd1fdd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &546091538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,6 +130,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1147903496989516686, guid: 3061b55acaed36f4da89955ddbf0f8fe, type: 3}
+      propertyPath: enemyCurrentHP
+      value: -1.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313854865360195708, guid: 3061b55acaed36f4da89955ddbf0f8fe, type: 3}
+      propertyPath: healthBarTargetOffset.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5820846698642977512, guid: 3061b55acaed36f4da89955ddbf0f8fe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -192,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 8669008457605370355, guid: 3061b55acaed36f4da89955ddbf0f8fe, type: 3}
       propertyPath: enemyStats
       value: 
-      objectReference: {fileID: 392867441}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -484,5 +481,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 1353260502}
   - {fileID: 1342890116}
-  - {fileID: 1822338877}
   - {fileID: 546091538}
+  - {fileID: 1822338877}

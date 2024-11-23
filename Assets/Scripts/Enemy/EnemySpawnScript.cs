@@ -17,7 +17,7 @@ public class EnemySpawnScript : MonoBehaviour{
         player = GameObject.FindGameObjectWithTag("Player");
 
 
-        healthBarScript.updateEnemyHealthBar();
+        
     }
 
     // Update is called once per frame
@@ -28,5 +28,6 @@ public class EnemySpawnScript : MonoBehaviour{
 
     public void spawnEnemy() {
         Instantiate(enemy, new Vector3(0, 6, player.transform.position.z), player.transform.rotation);
+        healthBarScript.updateEnemyHealthBar();
     }
 }
