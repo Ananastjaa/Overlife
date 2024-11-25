@@ -32,14 +32,14 @@ public class EnemySpawnScript : MonoBehaviour
         if (random.NextDouble() > 0.5f)
         {// Spawn on left or right
 
-            spawnX = random.NextDouble() > 0.5 ? enemyManagerScript.cameraXMin : enemyManagerScript.cameraXMin;
-            spawnY = Mathf.Lerp(enemyManagerScript.cameraYMin, enemyManagerScript.cameraYMax, (float)random.NextDouble());
+            spawnX = random.NextDouble() > 0.5 ? enemyManagerScript.CameraXMin : enemyManagerScript.CameraXMin;
+            spawnY = Mathf.Lerp(enemyManagerScript.CameraYMin, enemyManagerScript.CameraYMax, (float)random.NextDouble());
         }
         else// Spawn on top or bottom
         {
             
-            spawnY = random.NextDouble() > 0.5 ? enemyManagerScript.cameraYMax : enemyManagerScript.cameraYMin;
-            spawnX = Mathf.Lerp(enemyManagerScript.cameraXMin, enemyManagerScript.cameraXMax, (float)random.NextDouble());
+            spawnY = random.NextDouble() > 0.5 ? enemyManagerScript.CameraYMax : enemyManagerScript.CameraYMin;
+            spawnX = Mathf.Lerp(enemyManagerScript.CameraXMin, enemyManagerScript.CameraXMax, (float)random.NextDouble());
         }
 
         return new Vector3(spawnX, spawnY, enemyZSpawnCoordinate);
@@ -47,7 +47,7 @@ public class EnemySpawnScript : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        enemyManagerScript.currentEnemyCount++;
+        enemyManagerScript.CurrentEnemyCounter++;
         
         Instantiate(enemy, GetRandomSpawnPosition(), Quaternion.identity); // Instantiate the enemy at the calculated position
         

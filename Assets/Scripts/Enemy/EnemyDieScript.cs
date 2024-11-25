@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDieScript : MonoBehaviour{
 
-    public GameObject enemy;
+    public GameObject Enemy;
     private EnemyManager enemyManagerScript;
 
     // Start is called before the first frame update
@@ -19,11 +19,12 @@ public class EnemyDieScript : MonoBehaviour{
     }
 
     public void enemyDie() {
-        enemyManagerScript.currentEnemyCount--;
-        if (enemyManagerScript.currentEnemyCount < 0)
+        enemyManagerScript.CurrentEnemyCounter--;
+        if (enemyManagerScript.CurrentEnemyCounter < 0)
         {
-            enemyManagerScript.currentEnemyCount = 0; // Safety check
+            enemyManagerScript.CurrentEnemyCounter = 0; // Safety check
         }
         Destroy(gameObject);
+        enemyManagerScript.StartCoroutine(enemyManagerScript.EnemySpawnRoutine());
     }
 }

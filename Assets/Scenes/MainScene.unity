@@ -1150,14 +1150,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c304e601a4f6b14399b4d12877bfa70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCountOnTheMap: 5
-  spawnRate: 3
-  currentEnemyCount: 0
-  spawningEnabled: 1
-  cameraXMin: 0
-  cameraXMax: 0
-  cameraYMin: 0
-  cameraYMax: 0
+  _enemyMaxOnMap: 5
+  _spawnRate: 3
+  CurrentEnemyCounter: 0
+  _isEnemySpawningEnabled: 1
+  CameraXMin: 0
+  CameraXMax: 0
+  CameraYMin: 0
+  CameraYMax: 0
 --- !u!114 &1977299610
 MonoBehaviour:
   m_ObjectHideFlags: 0
