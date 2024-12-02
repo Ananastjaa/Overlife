@@ -1,24 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDieScript : MonoBehaviour{
-
-    public GameObject Enemy;
+public class EnemyDieScript : MonoBehaviour
+{
     private EnemyManager enemyManagerScript;
 
-    // Start is called before the first frame update
-    void Start(){
+    private void Start(){
         enemyManagerScript = GameObject.FindGameObjectWithTag("Environment").GetComponent<EnemyManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void enemyDie() {
+    public void EnemyDie() {
         enemyManagerScript.CurrentEnemyCounter--;
         if (enemyManagerScript.CurrentEnemyCounter < 0)
         {

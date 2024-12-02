@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 8669008457605370355}
   - component: {fileID: 1666134308530363589}
   - component: {fileID: 8614770280856325041}
+  - component: {fileID: 614729795962387558}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -475,7 +476,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7673200473639465433}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49a58126575542a44a9c53347cd1fdd4, type: 3}
   m_Name: 
@@ -495,8 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2441667034665474aa1c6ed26530fbb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 7673200473639465433}
-  enemyManagerScript: {fileID: 0}
+  Enemy: {fileID: 7673200473639465433}
 --- !u!114 &4313854865360195708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,10 +509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1113380ac9e0841a8e2c0b01762ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   healthBarOffset: {x: 0, y: 1, z: 0}
   rotationSpeed: 5
-  agent: {fileID: 0}
+  agent: {fileID: 8614770280856325041}
 --- !u!114 &5174145655026713234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,7 +519,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7673200473639465433}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f249abf8e054b84c909258a7b5458c1, type: 3}
   m_Name: 
@@ -574,6 +573,21 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &614729795962387558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7673200473639465433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b78267282e33a41a31eec0f5eef8d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 5
+  _demage: 1
+  _healthBar: {fileID: 3194287880711993389}
 --- !u!1 &8732408947818672262
 GameObject:
   m_ObjectHideFlags: 0

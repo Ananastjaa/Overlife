@@ -34,7 +34,7 @@ public class EnemyGettingDamage : MonoBehaviour{
         }
         else{
             //enemySpawnScript.SpawnEnemy();
-            enemyDieScript.enemyDie();
+            enemyDieScript.EnemyDie();
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using NavMeshPlus.Extensions;
+using Unity.VisualScripting;
 
 
 public class EnemyFollowScript : MonoBehaviour {
@@ -38,8 +39,11 @@ public class EnemyFollowScript : MonoBehaviour {
     }
 
     void Update() {
-        agent.SetDestination(player.transform.position); //Sets destination, moves the enemy and calculates the path
-        rotateEnemyToPlayer();
+        if (player != null && !player.IsDestroyed())
+        {
+            agent.SetDestination(player.transform.position); //Sets destination, moves the enemy and calculates the path
+            rotateEnemyToPlayer();
+        }
     }
     
 

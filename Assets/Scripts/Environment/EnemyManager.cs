@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    
     private EnemySpawnScript enemySpawnScript;
     [Tooltip("How many enemies should be on the map")]
     [SerializeField] private int _enemyMaxOnMap = 5; // Max enemies allowed on the map
