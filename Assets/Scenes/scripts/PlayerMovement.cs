@@ -8,9 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;  // Скорость движения игрока
     private Rigidbody2D rb;  // Ссылка на Rigidbody2D компонента
 
-    // Границы движения
-    public Vector2 minBounds;
-    public Vector2 maxBounds;
+    //// Границы движения
+    //public Vector2 minBounds;
+    //public Vector2 maxBounds;
 
     void Start()
     {
@@ -28,8 +28,8 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = moveInput * moveSpeed;
 
         // Ограничиваем движение по осям X и Y
-        float clampedX = Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x);
-        float clampedY = Mathf.Clamp(transform.position.y, minBounds.y, maxBounds.y);
-        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+        //float clampedX = Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x);
+        //float clampedY = Mathf.Clamp(transform.position.y, minBounds.y, maxBounds.y);
+        transform.position = new Vector3(moveX, moveY, transform.position.z);
     }
 }
