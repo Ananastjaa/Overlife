@@ -20,6 +20,7 @@ public class EnemyFight : MonoBehaviour
     {
         _dieScript = GetComponent<EnemyDieScript>();
         _health = _maxHealth;
+        _player = GameObject.FindGameObjectWithTag("Environment").GetComponent<PlayerFight>();
     }
 
     private void OnEnable()
@@ -37,7 +38,6 @@ public class EnemyFight : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             _isInDemageZone = true;
-            _player = other.gameObject.GetComponent<PlayerFight>();
             StartCoroutine(Attack(_player));
         }
     }
@@ -47,7 +47,6 @@ public class EnemyFight : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             _isInDemageZone = false;
-            _player = other.gameObject.GetComponent<PlayerFight>();
         }
     }
 

@@ -19,17 +19,27 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Получаем значения с джойстика
+        // Get joystick values
         float moveX = joystick.Horizontal;
         float moveY = joystick.Vertical;
 
-        // Нормализуем и создаём движение
-        Vector2 moveInput = new Vector2(moveX, moveY).normalized;
+        // Create a movement vector and normalize it to maintain consistent speed
+        Vector2 moveInput = new Vector2(moveX, moveY);
+        if (moveInput.magnitude > 1)
+        {
+            moveInput.Normalize(); // Ensures diagonal movement isn't faster
+        }
+
+        // Apply movement to Rigidbody
         rb.velocity = moveInput * moveSpeed;
 
-        // Ограничиваем движение по осям X и Y
-        //float clampedX = Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x);
-        //float clampedY = Mathf.Clamp(transform.position.y, minBounds.y, maxBounds.y);
-        transform.position = new Vector3(moveX, moveY, transform.position.z);
+        // Optional: Rotate the player to face the movement direction
+        if (moveInput != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
+
+
     }
 }

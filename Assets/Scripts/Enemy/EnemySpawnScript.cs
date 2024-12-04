@@ -7,7 +7,6 @@ public class EnemySpawnScript : MonoBehaviour
 {
 
     public GameObject enemy;
-    private EnemyHealthBarScript healthBarScript;
     private EnemyManager enemyManagerScript;
 
     //init vars
@@ -18,7 +17,6 @@ public class EnemySpawnScript : MonoBehaviour
     void Start()
     {
         //init Scripts
-        healthBarScript = GetComponent<EnemyHealthBarScript>();
         enemyManagerScript = GameObject.FindGameObjectWithTag("Environment").GetComponent<EnemyManager>();
 
 

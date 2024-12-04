@@ -63,9 +63,11 @@ public class EnemyManager : MonoBehaviour
         {
             while (_isEnemySpawningEnabled && CurrentEnemyCounter < _enemyMaxOnMap)
             {
-                yield return new WaitForSeconds(_spawnRate); // Wait for _spawnRate seconds
+                
+                    yield return new WaitForSeconds(_spawnRate); // Wait for _spawnRate seconds
 
-                enemySpawnScript.SpawnEnemy(); // Spawn the enemy
+                    enemySpawnScript.SpawnEnemy(); // Spawn the enemy
+                               
             }
         }
         finally
