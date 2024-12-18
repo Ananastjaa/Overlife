@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private bool _isEnemySpawningEnabled = true; // Controls if spawning is allowed
     [HideInInspector] public float CameraXMin, CameraXMax, CameraYMin, CameraYMax;
     private bool _isEnemySpawningCoroutineRunning = false; // Tracks if the enemy spawning coroutine is currently active
+    private GameObject _player;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class EnemyManager : MonoBehaviour
         CalculateCameraBounds();
 
         enemySpawnScript = GetComponent<EnemySpawnScript>();
+        _player = GameObject.FindGameObjectWithTag("Player");
 
         StartCoroutine(EnemySpawnRoutine());
     }
@@ -64,9 +67,12 @@ public class EnemyManager : MonoBehaviour
             while (_isEnemySpawningEnabled && CurrentEnemyCounter < _enemyMaxOnMap)
             {
                 
-                    yield return new WaitForSeconds(_spawnRate); // Wait for _spawnRate seconds
+                yield return new WaitForSeconds(_spawnRate); // Wait for _spawnRate seconds
 
+                if (enemySpawnScript!=null && _player != null && !_player.IsDestroyed()){
                     enemySpawnScript.SpawnEnemy(); // Spawn the enemy
+                }
+                
                                
             }
         }

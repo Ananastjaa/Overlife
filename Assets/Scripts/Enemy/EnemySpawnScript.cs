@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemySpawnScript : MonoBehaviour
 {
 
-    public GameObject enemy;
+    [SerializeField] GameObject enemyPrefab;
     private EnemyManager enemyManagerScript;
 
     //init vars
@@ -45,9 +45,16 @@ public class EnemySpawnScript : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        enemyManagerScript.CurrentEnemyCounter++;
+        if (enemyPrefab != null)
+        {
+            enemyManagerScript.CurrentEnemyCounter++;
+
+            Instantiate(enemyPrefab, GetRandomSpawnPosition(), Quaternion.identity); // Instantiate the enemy at the calculated position
+        }
+        else {
+            Debug.Log("enemyPrefab==null");
+        }
         
-        Instantiate(enemy, GetRandomSpawnPosition(), Quaternion.identity); // Instantiate the enemy at the calculated position
         
     }
 

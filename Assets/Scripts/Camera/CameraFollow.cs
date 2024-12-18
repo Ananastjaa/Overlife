@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -17,6 +18,9 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         // Обновляем позицию камеры, следя за игроком
-        transform.position = player.position + offset;
+        if (player != null && !player.IsDestroyed()) {
+            transform.position = player.position + offset;
+        }
+        
     }
 }
