@@ -67,7 +67,6 @@ public class EnemyFight : MonoBehaviour
     {
         while (_isInDemageZone && !player.IsDestroyed())
         {
-            
             player.GetDemage(_demage);
             yield return new WaitForSeconds(1);
         }

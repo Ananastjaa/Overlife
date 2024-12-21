@@ -14,17 +14,24 @@ public class PlayerFight : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
     private Color _hitColor = new Color(0.92f, 0.45f, 0.48f);
+    private GameOverHandler _gameOverHanler;
+
+    public void Start()
+    {
+        _gameOverHanler = FindObjectOfType<GameOverHandler>();
+    }
 
     public void GetDemage(double demage){
 
         if (_playerCanGetDamage) {
-            //_health -= demage;
+            _health -= demage;
             StartCoroutine(MakePlayeRedForAMoment());
             //Debug.Log("player health: " + _health);
 
             if (_health <= 0)
             {
-                Destroy(transform.parent.gameObject);
+                //Destroy(transform.parent.gameObject);
+                _gameOverHanler.GameOver();
             }
         }
         

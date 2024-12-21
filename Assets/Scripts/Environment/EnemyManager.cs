@@ -72,8 +72,8 @@ public class EnemyManager : MonoBehaviour
                 if (enemySpawnScript!=null && _player != null && !_player.IsDestroyed()){
                     enemySpawnScript.SpawnEnemy(); // Spawn the enemy
                 }
-                
-                               
+
+
             }
         }
         finally
