@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    private EnemySpawnScript enemySpawnScript;
+    private EnemySpawnScript _enemySpawnScript;
     [Tooltip("How many enemies should be on the map")]
     [SerializeField] private int _enemyMaxOnMap = 5; // Max enemies allowed on the map
     [Tooltip("Scenods between new enemy spawn")]
@@ -19,10 +19,8 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Precompute camera bounds once at the start
-        CalculateCameraBounds();
-
-        enemySpawnScript = GetComponent<EnemySpawnScript>();
+        
+        _enemySpawnScript = GetComponent<EnemySpawnScript>();
         _player = GameObject.FindGameObjectWithTag("Player");
 
         StartCoroutine(EnemySpawnRoutine());
@@ -35,24 +33,7 @@ public class EnemyManager : MonoBehaviour
     }
 
 
-    private void CalculateCameraBounds()
-    {
-
-        Camera mainCamera = Camera.main;
-
-        // Get screen size in world units
-        float screenHeight = 2f * mainCamera.orthographicSize;
-        float screenWidth = screenHeight * mainCamera.aspect;
-
-        // Calculate spawn distance beyond camera bounds
-        float spawnBuffer = 2f; // Distance outside the camera view
-        Vector3 cameraPosition = mainCamera.transform.position; // Camera's position
-
-        CameraXMin = cameraPosition.x - screenWidth / 2 - spawnBuffer;
-        CameraXMax = cameraPosition.x + screenWidth / 2 + spawnBuffer;
-        CameraYMin = cameraPosition.y - screenHeight / 2 - spawnBuffer;
-        CameraYMax = cameraPosition.y + screenHeight / 2 + spawnBuffer;
-    }
+    
 
 
 
@@ -69,8 +50,8 @@ public class EnemyManager : MonoBehaviour
                 
                 yield return new WaitForSeconds(_spawnRate); // Wait for _spawnRate seconds
 
-                if (enemySpawnScript!=null && _player != null && !_player.IsDestroyed()){
-                    enemySpawnScript.SpawnEnemy(); // Spawn the enemy
+                if (_enemySpawnScript!=null && _player != null && !_player.IsDestroyed()){
+                    _enemySpawnScript.SpawnEnemy(); // Spawn the enemy
                 }
 
 
