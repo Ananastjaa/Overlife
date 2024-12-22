@@ -8,7 +8,7 @@ public class EnemyFight : MonoBehaviour
 {
     [SerializeField] private double _maxHealth;
     [SerializeField] private double _demage;
-    [SerializeField] private Slider _healthBar;
+    [SerializeField] private HealthBar _healthBar;
 
     private EnemyDieScript _dieScript;
     private double _health;
@@ -20,7 +20,6 @@ public class EnemyFight : MonoBehaviour
     {
         _dieScript = GetComponent<EnemyDieScript>();
         _health = _maxHealth;
-        _healthBar.value = Convert.ToSingle(_health / _maxHealth);
         _playerFightScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerFight>();
         
     }
@@ -57,7 +56,7 @@ public class EnemyFight : MonoBehaviour
         if (_isInDemageZone)
         {
             _health -= demage;
-            _healthBar.value = Convert.ToSingle(_health / _maxHealth);
+            _healthBar.SetHealthBar(_health, _maxHealth);
 
             if (_health <= 0) _dieScript.EnemyDie();
         }
