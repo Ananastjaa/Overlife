@@ -1,11 +1,13 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerFight : MonoBehaviour
 {
     public static Action<double> PlayerAttack;
+    public static bool IsMeleeMode { get { return _isMeleeMode; } } 
     public double Health { get { return _currentHealth; } }
 
     [SerializeField] private double _maxHealth;
@@ -13,6 +15,8 @@ public class PlayerFight : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Toggle _playerCanGetDamageToggle;
     [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private TMP_Text _changeWeponbuttonText;
+    [SerializeField] private LongRangeWepon _wepon;
 
     private double _currentHealth;
 
@@ -23,6 +27,8 @@ public class PlayerFight : MonoBehaviour
 
     private Color _hitColor = new Color(0.92f, 0.45f, 0.48f);
     private GameOverHandler _gameOverHanler;
+
+    private static bool _isMeleeMode = true;
 
     public void Start()
     {
@@ -53,7 +59,30 @@ public class PlayerFight : MonoBehaviour
     }
     public void Attack()
     {
-        PlayerAttack?.Invoke(_demage);
+        if (_isMeleeMode) PlayerAttack?.Invoke(_demage);
+        else
+        {
+            if (EnemyList.Enemies.Count == 0) _wepon.OnFire(new Vector2(1, 0));
+            else
+            {
+                _wepon.OnFire(transform.position);
+            }
+        }
+    }
+
+    public void ChangeWepon()
+    {
+        _isMeleeMode = !_isMeleeMode;
+        if (_isMeleeMode)
+        {
+            _wepon.gameObject.SetActive(false);
+            _changeWeponbuttonText.text = "melee";
+        }
+        else
+        {
+            _wepon.gameObject.SetActive(true);
+            _changeWeponbuttonText.text = "gun";
+        }
     }
 
     private IEnumerator MakePlayeRedForAMoment()
@@ -76,5 +105,10 @@ public class PlayerFight : MonoBehaviour
         }
 
         _regenerationCoroutine = null; // Stop the coroutine when health is fully regenerated
+    }
+
+    private Vector2 FindNearestEnemy()
+    {
+        return new Vector2();
     }
 }

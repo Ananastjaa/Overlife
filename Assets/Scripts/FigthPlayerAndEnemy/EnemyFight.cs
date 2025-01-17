@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyFight : MonoBehaviour
 {
@@ -14,7 +15,6 @@ public class EnemyFight : MonoBehaviour
     private double _health;
     private PlayerFight _playerFightScript;
     private bool _isInDemageZone = false;
-    private bool _needToDestroy;
 
     private void Start()
     {
@@ -27,11 +27,13 @@ public class EnemyFight : MonoBehaviour
     private void OnEnable()
     {
         PlayerFight.PlayerAttack += GetDemage;
+        EnemyList.Enemies.Add(transform);
     }
 
     private void OnDisable()
     {
         PlayerFight.PlayerAttack -= GetDemage;
+        EnemyList.Enemies.Remove(transform);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -53,7 +55,7 @@ public class EnemyFight : MonoBehaviour
 
     public void GetDemage(double demage)
     {
-        if (_isInDemageZone)
+        if (!PlayerFight.IsMeleeMode || _isInDemageZone)
         {
             _health -= demage;
             _healthBar.SetHealthBar(_health, _maxHealth);
