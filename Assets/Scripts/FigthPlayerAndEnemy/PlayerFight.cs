@@ -20,7 +20,7 @@ public class PlayerFight : MonoBehaviour
 
     private double _currentHealth;
 
-    // health regeneration variable. maybe need to make make new class later
+    // health regeneration variables. maybe need to make make new class later
     private double regenAmount = 1; 
     private float _timeToStartRegeneration = 5f, _regenerationInterval = 1f; 
     private Coroutine _regenerationCoroutine;
@@ -28,10 +28,11 @@ public class PlayerFight : MonoBehaviour
     private Color _hitColor = new Color(0.92f, 0.45f, 0.48f);
     private GameOverHandler _gameOverHanler;
 
-    private static bool _isMeleeMode = true;
+    private static bool _isMeleeMode;
 
     public void Start()
     {
+        _isMeleeMode = true;
         _gameOverHanler = FindObjectOfType<GameOverHandler>();
         _currentHealth = _maxHealth;
     }

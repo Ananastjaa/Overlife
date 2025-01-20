@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class LongRangeWepon : MonoBehaviour
 {
@@ -7,8 +6,6 @@ public class LongRangeWepon : MonoBehaviour
     // later there will be reload speed and possibly range
 
     [SerializeField] private GameObject _bulletPrephab;
-    public double Demage { get { return _demage; } }
-    public float BulletSpeed { get { return _bulletSpeed; } }
 
     private float _demage = 2f, _bulletSpeed  = 10f;
 
@@ -18,5 +15,4 @@ public class LongRangeWepon : MonoBehaviour
         Bullet bullet = bulletObject.GetComponent<Bullet>();
         bullet.SetBullet(_demage, _bulletSpeed, EnemyList.NearestEnemy);
     }
-
 }

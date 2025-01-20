@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -8,7 +5,6 @@ public class Bullet : MonoBehaviour
     // later here can be bullet sprite
     private float _demage = 1f, _speed = 1f;
     private Vector3 _target;
-
 
     public void SetBullet(float demage, float speed, Vector3 target)
     {

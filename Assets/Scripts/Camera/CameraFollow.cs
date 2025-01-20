@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player; // Ссылка на объект игрока
-    public Vector3 offset;   // Смещение камеры относительно игрока
-    public Transform ground; // Reference to the ground object to set camera bounds
+    [SerializeField] private Transform _player;
+    [SerializeField] private Vector3 _offset;
+    [SerializeField] private Transform _ground; // Reference to the ground object to set camera bounds
 
-    private float minX, maxX, minY, maxY;
-    private Vector3 targetPosition;
-    private Camera mainCamera;
+    private float _minX, _maxX, _minY, _maxY, _halfHeight, _halfWidth;
+    private Vector3 _targetPosition;
+    private Camera _mainCamera;
+    private Renderer _groundRenderer;
 
     void Start()
     {
-        mainCamera = GetComponent<Camera>();
+        _mainCamera = GetComponent<Camera>();
 
-        // Если смещение не указано, устанавливаем его как разницу между позицией камеры и игроком
-        if (offset == Vector3.zero)
+        if (_offset == Vector3.zero)
         {
-            offset = transform.position - player.position;
+            _offset = transform.position - _player.position;
         }
 
         SetCameraBounds();
@@ -26,30 +26,28 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        // Обновляем позицию камеры, следя за игроком
-        if (player != null && !player.IsDestroyed()) {
-            targetPosition = player.position + offset;
+        if (_player != null && !_player.IsDestroyed()) {
+            _targetPosition = _player.position + _offset;
 
             // Clamp the camera position to stay within the boundaries of the ground
-            targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
-            targetPosition.y = Mathf.Clamp(targetPosition.y, minY, maxY);
+            _targetPosition.x = Mathf.Clamp(_targetPosition.x, _minX, _maxX);
+            _targetPosition.y = Mathf.Clamp(_targetPosition.y, _minY, _maxY);
 
-            transform.position = targetPosition;
+            transform.position = _targetPosition;
         }
-        
     }
 
     void SetCameraBounds()
     {
-        // works if grund is rectangle!!!
-        Renderer groundRenderer = ground.GetComponent<Renderer>();
+        // works only if grund is rectangle!!!
+        _groundRenderer = _ground.GetComponent<Renderer>();
 
-        float halfHeight = mainCamera.orthographicSize;
-        float halfWidth = mainCamera.aspect * halfHeight;
+        _halfHeight = _mainCamera.orthographicSize;
+        _halfWidth = _mainCamera.aspect * _halfHeight;
 
-        minX = ground.position.x - groundRenderer.bounds.size.x / 2 + halfWidth;
-        maxX = ground.position.x + groundRenderer.bounds.size.x / 2 - halfWidth;
-        minY = ground.position.y - groundRenderer.bounds.size.y / 2 + halfHeight;
-        maxY = ground.position.y + groundRenderer.bounds.size.y / 2 - halfHeight;
+        _minX = _ground.position.x - _groundRenderer.bounds.size.x / 2 + _halfWidth;
+        _maxX = _ground.position.x + _groundRenderer.bounds.size.x / 2 - _halfWidth;
+        _minY = _ground.position.y - _groundRenderer.bounds.size.y / 2 + _halfHeight;
+        _maxY = _ground.position.y + _groundRenderer.bounds.size.y / 2 - _halfHeight;
     }
 }

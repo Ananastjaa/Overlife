@@ -3,10 +3,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Joystick joystick;
-    public float moveSpeed = 5f; 
+    private float _moveSpeed = 5f, _angle, _moveX, _moveY; 
     private Rigidbody2D rb;
-    private Vector3 _nearestEnemy;
-
+    private Vector3 _nearestEnemy, _direction;
 
     void Start()
     {
@@ -18,21 +17,21 @@ public class PlayerMovement : MonoBehaviour
         //rotation
         EnemyList.GetNearestEnemiposition(transform.position);
         _nearestEnemy = EnemyList.NearestEnemy;
-        Vector3 direction = transform.position - _nearestEnemy;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        _direction = transform.position - _nearestEnemy;
+        _angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
 
         // Get joystick values
-        float moveX = joystick.Horizontal;
-        float moveY = joystick.Vertical;
+        _moveX = joystick.Horizontal;
+        _moveY = joystick.Vertical;
 
-        Vector2 moveInput = new Vector2(moveX, moveY);
+        Vector2 moveInput = new Vector2(_moveX, _moveY);
         if (moveInput.magnitude > 1)
         {
             moveInput.Normalize(); // Ensures diagonal movement isn't faster
         }
 
         // Apply movement to Rigidbody
-        rb.velocity = moveInput * moveSpeed;
+        rb.velocity = moveInput * _moveSpeed;
     }
 }

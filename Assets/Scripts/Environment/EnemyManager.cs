@@ -19,23 +19,11 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         _enemySpawnScript = GetComponent<EnemySpawnScript>();
         _player = GameObject.FindGameObjectWithTag("Player");
 
         StartCoroutine(EnemySpawnRoutine());
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-    
-
-
 
     public IEnumerator EnemySpawnRoutine()
     {
