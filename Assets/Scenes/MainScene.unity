@@ -2401,7 +2401,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 2015788460}
-  moveSpeed: 5
 --- !u!50 &1342890119
 Rigidbody2D:
   serializedVersion: 4
@@ -2534,9 +2533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a9cbe86367e6940b60ed7e05a72a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1342890116}
-  offset: {x: 0, y: 1, z: -5}
-  ground: {fileID: 1331000686}
+  _player: {fileID: 1342890116}
+  _offset: {x: 0, y: 0, z: -5}
+  _ground: {fileID: 1331000686}
 --- !u!1 &1375209867 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5506466799044923970, guid: 3061b55acaed36f4da89955ddbf0f8fe, type: 3}
