@@ -4,32 +4,33 @@ using Unity.VisualScripting;
 
 public class EnemyFight : MonoBehaviour
 {
+    // !!DEVIDES THIS CLASS!!
     [SerializeField] private double _maxHealth;
     [SerializeField] private double _demage;
     [SerializeField] private HealthBar _healthBar;
 
     private EnemyDieScript _dieScript;
     private double _health;
-    private PlayerFight _playerFightScript;
+    private PlayerHealth _playerHealthScript;
     private bool _isInDemageZone = false;
 
     private void Start()
     {
         _dieScript = GetComponent<EnemyDieScript>();
         _health = _maxHealth;
-        _playerFightScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerFight>();
+        _playerHealthScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         
     }
 
     private void OnEnable()
     {
-        PlayerFight.PlayerAttack += GetDemage;
+        PlayerAttack.PlayerAttacked += GetDemage;
         EnemyList.Enemies.Add(transform);
     }
 
     private void OnDisable()
     {
-        PlayerFight.PlayerAttack -= GetDemage;
+        PlayerAttack.PlayerAttacked -= GetDemage;
         EnemyList.Enemies.Remove(transform);
     }
 
@@ -38,7 +39,7 @@ public class EnemyFight : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             _isInDemageZone = true;
-            StartCoroutine(Attack(_playerFightScript));
+            StartCoroutine(Attack(_playerHealthScript));
         }
     }
 
@@ -52,7 +53,7 @@ public class EnemyFight : MonoBehaviour
 
     public void GetDemage(double demage)
     {
-        if (!PlayerFight.IsMeleeMode || _isInDemageZone)
+        if (!PlayerAttack.IsMeleeMode || _isInDemageZone)
         {
             _health -= demage;
             _healthBar.SetHealthBar(_health, _maxHealth);
@@ -61,7 +62,7 @@ public class EnemyFight : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack(PlayerFight player)
+    private IEnumerator Attack(PlayerHealth player)
     {
         while (_isInDemageZone && !player.IsDestroyed())
         {

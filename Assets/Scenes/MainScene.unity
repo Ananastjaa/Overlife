@@ -685,7 +685,8 @@ GameObject:
   m_Component:
   - component: {fileID: 494802032}
   - component: {fileID: 494802034}
-  - component: {fileID: 494802033}
+  - component: {fileID: 494802036}
+  - component: {fileID: 494802035}
   m_Layer: 0
   m_Name: player_fight_zone
   m_TagString: Player
@@ -708,25 +709,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1342890116}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &494802033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494802031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5df12865b500843aea31da13ddcf8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 10
-  _demage: 2
-  _spriteRenderer: {fileID: 1342890115}
-  _playerCanGetDamageToggle: {fileID: 187547315}
-  _healthBar: {fileID: 1783680083}
-  _changeWeponbuttonText: {fileID: 1762088695}
-  _wepon: {fileID: 1300175964}
 --- !u!58 &494802034
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -762,6 +744,34 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.5
+--- !u!114 &494802035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494802031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96bf711151c430c4eb8ae7202364d82d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedFightModeButtonText: {fileID: 1762088695}
+--- !u!114 &494802036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494802031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94aefef31b6ea242b5f1040b37da5a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCanGetDamageToggle: {fileID: 187547315}
+  _healthBar: {fileID: 1783680083}
+  _spriteRenderer: {fileID: 1342890115}
 --- !u!1 &502666409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,7 +1666,7 @@ GameObject:
   - component: {fileID: 906317003}
   - component: {fileID: 906317002}
   m_Layer: 5
-  m_Name: changeWepon
+  m_Name: FightModeButt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1699,8 +1709,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 494802033}
-          m_TargetAssemblyTypeName: PlayerFight, Assembly-CSharp
+        - m_Target: {fileID: 494802035}
+          m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
           m_MethodName: ChangeWepon
           m_Mode: 1
           m_Arguments:
@@ -2277,6 +2287,7 @@ GameObject:
   - component: {fileID: 1342890114}
   - component: {fileID: 1342890118}
   - component: {fileID: 1342890119}
+  - component: {fileID: 1342890120}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -2428,6 +2439,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1342890120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342890113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f8ef77ef974084e8643c0a05ac3080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 10
+  DemageMelee: 2
+  LongRangeWepon: {fileID: 1300175964}
+  IsPlayerImmortal: 0
+  TimeToStartRegeneration: 5
+  RegenerationInterval: 1
+  XpOfHealthRegenerationPerInterval: 1
 --- !u!1 &1353260499
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,8 +3279,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 494802033}
-          m_TargetAssemblyTypeName: PlayerFight, Assembly-CSharp
+        - m_Target: {fileID: 494802035}
+          m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
           m_MethodName: Attack
           m_Mode: 1
           m_Arguments:
