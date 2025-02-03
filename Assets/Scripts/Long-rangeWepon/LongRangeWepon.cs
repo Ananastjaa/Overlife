@@ -8,6 +8,7 @@ public class LongRangeWepon : MonoBehaviour
     [SerializeField] private GameObject _bulletPrephab;
 
     private float _demage = 2f, _bulletSpeed  = 10f;
+    private string _longRangeWeponName;
 
     public void OnFire(Vector3 playerPos)
     {
