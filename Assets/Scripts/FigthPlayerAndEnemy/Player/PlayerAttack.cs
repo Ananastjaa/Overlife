@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Start()
     {
-        _playerStats = FindObjectOfType< PlayerStats>();
+        _playerStats = FindObjectOfType<PlayerStats>();
         _isMeleeMode = _selectedFightModeButtonText.text == "melee";
     }
 

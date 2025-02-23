@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
     // nikakoj inkopsulacii, podumatj mozet ispavitj mozno.
     [SerializeField] public double MaxHealth;
     [SerializeField] public double DemageMelee;
-    [SerializeField] public LongRangeWepon LongRangeWepon;
+    [SerializeField] public LongRangeWeapon LongRangeWepon;
     [SerializeField] public bool IsPlayerImmortal = false;
 
     // health regeneration variables.
