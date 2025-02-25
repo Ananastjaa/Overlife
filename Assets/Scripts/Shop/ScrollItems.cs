@@ -21,31 +21,34 @@ public class ScrollItems : MonoBehaviour
 
     private void Update()
     {
-        _currItemIndex = Mathf.RoundToInt(0 - _contentRectTransform.localPosition.x / (_contentItemSample.rect.width + _horizontalLayoutGroup.spacing));
+        if(_contentRectTransform.transform.childCount != 0) // ochenj ochenj hujovoje resenije
+        {
+            _currItemIndex = Mathf.RoundToInt(0 - _contentRectTransform.localPosition.x / (_contentItemSample.rect.width + _horizontalLayoutGroup.spacing));
 
-        if (Input.touchCount == 0)
-        {
-            if(_arrowSwithcPressed) // arrow work
+            if (Input.touchCount == 0)
             {
-                _arrowSwithcPressed = !CenterItem();
+                if (_arrowSwithcPressed) // arrow work
+                {
+                    _arrowSwithcPressed = !CenterItem();
+                }
+                else // control if selected item in shop is centered
+                {
+                    if (_scrollRect.velocity.magnitude < 200 && _scrollRect.velocity.magnitude > 0)
+                    {
+                        _scrollRect.velocity = Vector3.zero;
+                        _destPosX = 0 - (_currItemIndex * (_contentItemSample.rect.width + _horizontalLayoutGroup.spacing));
+                    }
+                    if (_contentRectTransform.localPosition.x != _destPosX && _scrollRect.velocity.magnitude == 0)
+                    {
+                        CenterItem();
+                    }
+                }
+
             }
-            else // control if selected item in shop is centered
+            else // if user scroll items himself, nothing other should work (that works only on smartphone, dosen't work in editor)
             {
-                if (_scrollRect.velocity.magnitude < 200 && _scrollRect.velocity.magnitude > 0)
-                {
-                    _scrollRect.velocity = Vector3.zero;
-                    _destPosX = 0 - (_currItemIndex * (_contentItemSample.rect.width + _horizontalLayoutGroup.spacing));
-                }
-                if (_contentRectTransform.localPosition.x != _destPosX && _scrollRect.velocity.magnitude == 0)
-                {
-                    CenterItem();
-                }
+                _arrowSwithcPressed = false;
             }
-            
-        }
-        else // if user scroll items himself, nothing other should work (that works only on smartphone, dosen't work in editor)
-        {
-            _arrowSwithcPressed = false;
         }
     }
 
@@ -62,7 +65,7 @@ public class ScrollItems : MonoBehaviour
 
     public void SwithToNextItem()
     {
-        if (_currItemIndex < 2) // leter 2 must replace with weapon.Count or sth like that 
+        if (_currItemIndex < Weapons.LRWeaponDict.Keys.Count - 1)
         {
             _destPosX = 0 - ((_currItemIndex + 1) * (_contentItemSample.rect.width + _horizontalLayoutGroup.spacing));
             _arrowSwithcPressed = true;

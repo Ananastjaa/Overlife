@@ -5,18 +5,18 @@ using UnityEngine;
 public class TxtFileReader : MonoBehaviour
 {
     private StreamReader _reader;
-    private List<string> _fileContent = new List<string>();
+    private List<string> _fileContent;
     private string _line;
 
     public List<string> GetFileContent(string filePath)
     {
-        _fileContent.Clear();
+        _fileContent = new List<string>();
         _reader = new StreamReader(filePath);
-        _line = _reader.ReadLine();
 
         while (!_reader.EndOfStream)
         {
-            if (_line != null || _line != "")
+            _line = _reader.ReadLine();
+            if (_line != null && _line != "")
             {
                 _fileContent.Add(_line);
             }

@@ -9,22 +9,28 @@ public class JSONFileReader : MonoBehaviour
     public static Dictionary<string, WeaponGeneralData> WeaponGenDataDict { get { return _weaponGenDataDict; } }
 
     private StreamReader _reader;
+    private StreamWriter _writer;
 
     private static Dictionary<string, WeaponCurrentData> _weaponCurDataDict = new();
     private static Dictionary<string, WeaponGeneralData> _weaponGenDataDict = new();
 
-    private List<WeaponCurrentData> _weaponCurDataList;
-    private List<WeaponGeneralData> _weaponGenDataList;
+    private static List<WeaponCurrentData> _weaponCurDataList;
+    private static List<WeaponGeneralData> _weaponGenDataList;
 
     private string _json;
 
-    private void Start() // that need to bee called only once when app started to work
+    private void OnEnable()
     {
-        SetWeapCureDataList();
-        SetWeapGenDataList();
+        Weapons.SelectedWeaponChanged += UpdateFileData;
     }
 
-    private void SetWeapCureDataList()
+    private void OnDisable()
+    {
+        Weapons.SelectedWeaponChanged -= UpdateFileData;
+    }
+
+
+    public void SetWeapCureDataDict()
     {
         _weaponCurDataList = new List<WeaponCurrentData>();
 
@@ -35,8 +41,15 @@ public class JSONFileReader : MonoBehaviour
             _json = _reader.ReadLine();
             if (_json != null)
             {
-                WeaponCurrentData temp = JsonUtility.FromJson<WeaponCurrentData>(_json);
-                _weaponCurDataList.Add(temp);
+                try
+                {
+                    WeaponCurrentData temp = JsonUtility.FromJson<WeaponCurrentData>(_json);
+                    _weaponCurDataList.Add(temp);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
             }
         }
 
@@ -48,7 +61,7 @@ public class JSONFileReader : MonoBehaviour
         }
     }
 
-    private void SetWeapGenDataList()
+    public void SetWeapGenDataDict()
     {
         _weaponGenDataList = new List<WeaponGeneralData>();
 
@@ -59,8 +72,15 @@ public class JSONFileReader : MonoBehaviour
             _json = _reader.ReadLine();
             if (_json != null)
             {
-                WeaponGeneralData temp = JsonUtility.FromJson<WeaponGeneralData>(_json);
-                _weaponGenDataList.Add(temp);
+                try
+                {
+                    WeaponGeneralData temp = JsonUtility.FromJson<WeaponGeneralData>(_json);
+                    _weaponGenDataList.Add(temp);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
             }
         }
 
@@ -71,6 +91,27 @@ public class JSONFileReader : MonoBehaviour
             _weaponGenDataDict[weopData.WeaponID] = weopData;
         }
     }
+
+    public void UpdateFileData()
+    {
+        UpdateWeaponCurDataJson();
+    }
+
+    private void UpdateWeaponCurDataJson()
+    {
+        _weaponCurDataList = new List<WeaponCurrentData>();
+
+        _writer = new StreamWriter(Paths.WeaponCurDataJson);
+
+        foreach(var weaponData in WeaponCurDataDict.Values)
+        {
+            _json = JsonUtility.ToJson(weaponData);
+            _writer.WriteLine(_json);
+        }
+
+        _writer.Close();
+    }
+
 
     //private void PrintDictionaries()
     //{
