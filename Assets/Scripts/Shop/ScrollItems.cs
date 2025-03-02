@@ -21,7 +21,7 @@ public class ScrollItems : MonoBehaviour
 
     private void Update()
     {
-        if(_contentRectTransform.transform.childCount != 0) // ochenj ochenj hujovoje resenije
+        if(_contentRectTransform.transform.childCount != 0) // ochenj ochenj hujovoje resenije delatj tut kazdij raz provrku
         {
             _currItemIndex = Mathf.RoundToInt(0 - _contentRectTransform.localPosition.x / (_contentItemSample.rect.width + _horizontalLayoutGroup.spacing));
 

@@ -5,30 +5,12 @@ using System;
 
 public class JSONFileReader : MonoBehaviour
 {
-    public static Dictionary<string, WeaponCurrentData> WeaponCurDataDict { get { return _weaponCurDataDict; } }
-    public static Dictionary<string, WeaponGeneralData> WeaponGenDataDict { get { return _weaponGenDataDict; } }
-
     private StreamReader _reader;
-    private StreamWriter _writer;
-
-    private static Dictionary<string, WeaponCurrentData> _weaponCurDataDict = new();
-    private static Dictionary<string, WeaponGeneralData> _weaponGenDataDict = new();
 
     private static List<WeaponCurrentData> _weaponCurDataList;
     private static List<WeaponGeneralData> _weaponGenDataList;
 
     private string _json;
-
-    private void OnEnable()
-    {
-        Weapons.SelectedWeaponChanged += UpdateFileData;
-    }
-
-    private void OnDisable()
-    {
-        Weapons.SelectedWeaponChanged -= UpdateFileData;
-    }
-
 
     public void SetWeapCureDataDict()
     {
@@ -57,7 +39,7 @@ public class JSONFileReader : MonoBehaviour
 
         foreach (WeaponCurrentData weopData in _weaponCurDataList)
         {
-            _weaponCurDataDict[weopData.WeaponID] = weopData;
+            WeaponDataDicts.WeaponCurDataDict[weopData.WeaponID] = weopData;
         }
     }
 
@@ -88,30 +70,11 @@ public class JSONFileReader : MonoBehaviour
 
         foreach (WeaponGeneralData weopData in _weaponGenDataList)
         {
-            _weaponGenDataDict[weopData.WeaponID] = weopData;
+            WeaponDataDicts.WeaponGenDataDict[weopData.WeaponID] = weopData;
         }
     }
 
-    public void UpdateFileData()
-    {
-        UpdateWeaponCurDataJson();
-    }
-
-    private void UpdateWeaponCurDataJson()
-    {
-        _weaponCurDataList = new List<WeaponCurrentData>();
-
-        _writer = new StreamWriter(Paths.WeaponCurDataJson);
-
-        foreach(var weaponData in WeaponCurDataDict.Values)
-        {
-            _json = JsonUtility.ToJson(weaponData);
-            _writer.WriteLine(_json);
-        }
-
-        _writer.Close();
-    }
-
+    //     MAY BE USEFUL LATER
 
     //private void PrintDictionaries()
     //{
@@ -129,7 +92,6 @@ public class JSONFileReader : MonoBehaviour
     //        Debug.Log($"{key} ---> price:{a}, MaxDem:{b}");
     //    }
     //}
-
 
     //public void WriteData()
     //{
@@ -164,7 +126,6 @@ public class JSONFileReader : MonoBehaviour
     //    {
     //        jsonString2 += JsonUtility.ToJson(obj) + "\n";
     //    }
-
 
     //    _wreader2.WriteLine(jsonString2);
     //    _wreader2.Close();

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class TabSwitch : MonoBehaviour
 {
+    // switch tabs in weapon shop (gun-player-...)
     [SerializeField] GameObject[] _tabs;
     [SerializeField] RectTransform[] _tabButtRecTranforms;
     [SerializeField] Button[] _tabButtons;

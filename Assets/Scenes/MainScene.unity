@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 135006798}
   - component: {fileID: 135006797}
   - component: {fileID: 135006799}
-  - component: {fileID: 135006800}
   - component: {fileID: 135006801}
   m_Layer: 0
   m_Name: ScriptObject
@@ -183,18 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameOverPanel: {fileID: 475226638}
---- !u!114 &135006800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135006796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d956117799be05d4ca9b756357d8c9e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &135006801
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-{"Demage":1.0,"IsBought":true,"IsSelected":false,"WeaponID":"weapon1"}
-{"Demage":2.0,"IsBought":true,"IsSelected":false,"WeaponID":"weapon2"}
-{"Demage":3.0,"IsBought":true,"IsSelected":true,"WeaponID":"weapon3"}
+{"Demage":1.0,"IsBought":false,"IsSelected":false,"WeaponID":"weapon1"}
+{"Demage":2.0,"IsBought":true,"IsSelected":true,"WeaponID":"weapon2"}
+{"Demage":3.0,"IsBought":false,"IsSelected":false,"WeaponID":"weapon3"}
 {"Demage":5.0,"IsBought":false,"IsSelected":false,"WeaponID":"bomba Raketa"}

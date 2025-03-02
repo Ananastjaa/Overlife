@@ -11,6 +11,6 @@ public class LongRangeWeapon : MonoBehaviour
     {
         GameObject bulletObject = Instantiate(_bulletPrephab, transform.position, transform.rotation);
         Bullet bullet = bulletObject.GetComponent<Bullet>();
-        bullet.SetBullet(Weapons.SelectedLRWeapon.WeaponCurrentData.Demage, _bulletSpeed, EnemyList.NearestEnemy);
+        bullet.SetBullet(Weapons.SelectedLRWeapon.CurrentData.Demage, _bulletSpeed, EnemyList.NearestEnemy);
     }
 }

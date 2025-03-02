@@ -2,21 +2,15 @@ using UnityEngine;
 
 public class LRWeaponObject : MonoBehaviour
 {
-    public WeaponGeneralData WeaponGeneralData { get { return _weaponGeneralData; } }
-    public WeaponCurrentData WeaponCurrentData { get { return _weaponCurrentData; } }
+    public WeaponGeneralData GeneralData { get { return _generalData; } }
+    public WeaponCurrentData CurrentData { get { return _currentData; } }
 
-    private WeaponCurrentData _weaponCurrentData;
-    private WeaponGeneralData _weaponGeneralData;
-
-    //public LRWeaponObject(string weaponID)
-    //{
-    //    _weaponCurrentData = JSONFileReader.WeaponCurDataDict[weaponID];
-    //    _weaponGeneralData = JSONFileReader.WeaponGenDataDict[weaponID];
-    //}
+    private WeaponCurrentData _currentData;
+    private WeaponGeneralData _generalData;
 
     public void Init(string weaponID)
     {
-        _weaponCurrentData = JSONFileReader.WeaponCurDataDict[weaponID];
-        _weaponGeneralData = JSONFileReader.WeaponGenDataDict[weaponID];
+        _currentData = WeaponDataDicts.WeaponCurDataDict[weaponID];
+        _generalData = WeaponDataDicts.WeaponGenDataDict[weaponID];
     }
 }
